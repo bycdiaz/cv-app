@@ -1,10 +1,30 @@
 import { useState } from "react";
 import Header from "./components/Header"
 import SectionTabs from "./components/SectionTabs"
-import { Section } from "./types";
+import { EducationFields, PersonalDetailFields, Section, WorkExperienceFields } from "./types";
 
+
+// TODO Create reusable form component that can accept any of the states below
 function App() {
   const [currentTab, setCurrentTab] = useState<Section>('personal-details');
+  const [personalDetails, setPersonaldetails] = useState<PersonalDetailFields>({
+    'full-name': '',
+    'email': '',
+    'phone-number': ''
+  });
+
+  const [education, setEducation] = useState<EducationFields>({
+    'school-name': '',
+    'major': '',
+    'graduation-year': ''
+  });
+
+  const [workExperience, setWorkExperience] = useState<WorkExperienceFields>({
+    'company-name': '',
+    'position-title': '',
+    'start-date': undefined,
+    'end-date': undefined
+  });
 
   return (
     <div>
@@ -12,7 +32,6 @@ function App() {
         pageTitle={"CV App"}
       />
       <SectionTabs
-        tabs={['personal-details', 'education', 'work-experience']}
         activeSection={currentTab}
         onSectionClick={handleTabClick}
       />
