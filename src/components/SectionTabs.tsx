@@ -1,20 +1,19 @@
-import { Section } from "../types";
+import { Section, sectionKeysToStrings, sections } from "../types";
 
 function SectionTabs(
   props: {
-    tabs: Section[];
     activeSection: Section;
     onSectionClick: (section: Section) => void;
   }
 ) {
   return (
-    props.tabs.map(tab =>
+    sections.map(tab =>
       <button
         onClick={() => props.onSectionClick(tab)}
         key={tab}
         className={buttonClasses(tab)}
       >
-        {tab}
+        {sectionKeysToStrings[tab]}
       </button>
     )
   )
