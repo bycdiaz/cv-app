@@ -31,3 +31,11 @@ export type WorkExperienceFields = {
   'start-date': Date | undefined;
   'end-date': Date | undefined;
 }
+
+export type StateFunction<T> = React.Dispatch<React.SetStateAction<T>>;
+
+export type StateFunctions = {
+  'personal-details': StateFunction<PersonalDetailFields>,
+  'education': StateFunction<EducationFields>,
+  'work-experience': StateFunction<WorkExperienceFields>,
+}

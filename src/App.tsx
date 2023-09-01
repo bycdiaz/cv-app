@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "./components/Header"
 import SectionTabs from "./components/SectionTabs"
 import { EducationFields, PersonalDetailFields, Section, WorkExperienceFields } from "./types";
+import EditSection from "./components/EditSection";
 
 
 // TODO Create reusable form component that can accept any of the states below
@@ -35,11 +36,32 @@ function App() {
         activeSection={currentTab}
         onSectionClick={handleTabClick}
       />
+      <EditSection
+        currentTab={currentTab}
+        currentSetStateFunction={currentFormStateFunction(currentTab)}
+        currentFormState={currentFormState(currentTab)}
+      />
     </div>
   )
 
   function handleTabClick(section: Section) {
     setCurrentTab(section);
+  }
+
+  function currentFormStateFunction(section: Section) {
+    return {
+      'personal-details': setPersonaldetails,
+      'education': setEducation,
+      'work-experience': setWorkExperience
+    }[section];
+  }
+
+  function currentFormState(section: Section) {
+    return {
+      'personal-details': personalDetails,
+      'education': education,
+      'work-experience': workExperience
+    }[section];
   }
 }
 
