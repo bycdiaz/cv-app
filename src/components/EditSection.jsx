@@ -34,7 +34,13 @@ function EditSection({
   }
 
   function getCurrentFieldValue(label) {
-    return getCurrentFormState(currentTab)[label].toString() || '';
+    const currentValue = getCurrentFormState(currentTab)[label];
+
+    if (currentValue !== undefined) {
+      return currentValue;
+    }
+    
+    return '';
   }
 
   function getCurrentFormState(currentTab) {
