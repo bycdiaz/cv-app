@@ -1,8 +1,12 @@
-function EditSection(props) {
+function EditSection({
+  currentTab,
+  currentFormState,
+  currentSetStateFunction
+}) {
 
   return (
     <form>
-      <div>Current Section: {props.currentTab}</div>
+      <div>Current Section: {currentTab}</div>
       {getLabels().map(label => {
         return (
           <div
@@ -26,30 +30,26 @@ function EditSection(props) {
   );
 
   function getLabels() {
-    return Object.keys(getCurrentFormState(props.currentTab));
+    return Object.keys(getCurrentFormState(currentTab));
   }
 
   function getCurrentFieldValue(label) {
-    return getCurrentFormState(props.currentTab)[label].toString() || '';
+    return getCurrentFormState(currentTab)[label].toString() || '';
   }
 
   function getCurrentFormState(currentTab) {
-    return props.currentFormState[currentTab];
+    return currentFormState[currentTab];
   };
 
   function getCurrentSetStateFunction() {
-    return props.currentSetStateFunction[props.currentTab];
+    return currentSetStateFunction[currentTab];
   }
 
   function handleOnChange(updatedValue, label) {
-    const currentFormState = getCurrentFormState(props.currentTab);
-    const currentSetStateFunction = getCurrentSetStateFunction();
-    const newFormState = {
-      ...currentFormState,
+    getCurrentSetStateFunction()({
+      ...getCurrentFormState(currentTab),
       [label]: updatedValue
-    };
-
-    currentSetStateFunction(newFormState);
+    });
   }
 }
 
