@@ -1,7 +1,8 @@
 function EditSection({
   currentTab,
   currentFormState,
-  currentSetStateFunction
+  currentSetStateFunction,
+  setEditMode
 }) {
 
   return (
@@ -25,7 +26,10 @@ function EditSection({
           </div>
         )
       })}
-      <input type="submit" value="Submit" />
+      <input type="submit" value="Preview" onClick={e => {
+        e.preventDefault();
+        setEditMode(false);
+      }}/>
     </form>
   );
 
