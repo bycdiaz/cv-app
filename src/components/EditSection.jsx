@@ -3,7 +3,7 @@ function EditSection(props) {
   return (
     <form>
       <div>Current Section: {props.currentTab}</div>
-      {getLabels()?.map(label => {
+      {getLabels().map(label => {
         return (
           <div
             className="input-container"
