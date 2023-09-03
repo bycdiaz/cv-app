@@ -5,7 +5,6 @@ import { EducationFields, PersonalDetailFields, Section, WorkExperienceFields } 
 import EditSection from "./components/EditSection";
 
 
-// TODO Create reusable form component that can accept any of the states below
 function App() {
   const [currentTab, setCurrentTab] = useState<Section>('personal-details');
   const [personalDetails, setPersonaldetails] = useState<PersonalDetailFields>({
@@ -38,8 +37,8 @@ function App() {
       />
       <EditSection
         currentTab={currentTab}
-        currentSetStateFunction={currentFormStateFunction(currentTab)}
-        currentFormState={currentFormState(currentTab)}
+        currentSetStateFunction={currentFormStateFunction()}
+        currentFormState={currentFormState()}
       />
     </div>
   )
@@ -48,20 +47,20 @@ function App() {
     setCurrentTab(section);
   }
 
-  function currentFormStateFunction(section: Section) {
+  function currentFormStateFunction() {
     return {
       'personal-details': setPersonaldetails,
       'education': setEducation,
       'work-experience': setWorkExperience
-    }[section];
+    };
   }
 
-  function currentFormState(section: Section) {
+  function currentFormState() {
     return {
       'personal-details': personalDetails,
       'education': education,
       'work-experience': workExperience
-    }[section];
+    };
   }
 }
 

@@ -9,9 +9,9 @@ export const sectionKeysToStrings = {
 
 export const sectionStrings = Object.values(sectionKeysToStrings) as Section[];
 
-type Email = `${string}@${string}.${string}`;
-type PhoneNumber = `${number}${number}${number}-${number}${number}${number}-${number}${number}${number}${number}`;
-type Year = `${number}${number}${number}${number}`;
+type Email = string;
+type PhoneNumber = number;
+type Year = number;
 
 export type PersonalDetailFields = {
   'full-name': string;
