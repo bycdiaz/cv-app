@@ -1,25 +1,25 @@
 import { useState } from "react";
 import Header from "./components/Header"
 import SectionTabs from "./components/SectionTabs"
-import { EducationFields, PersonalDetailFields, Section, WorkExperienceFields } from "./types";
 import EditSection from "./components/EditSection";
 
+export const sections = ['personal-details', 'education', 'work-experience'];
 
 function App() {
-  const [currentTab, setCurrentTab] = useState<Section>('personal-details');
-  const [personalDetails, setPersonaldetails] = useState<PersonalDetailFields>({
+  const [currentTab, setCurrentTab] = useState(sections[0]);
+  const [personalDetails, setPersonaldetails] = useState({
     'full-name': '',
     'email': '',
     'phone-number': ''
   });
 
-  const [education, setEducation] = useState<EducationFields>({
+  const [education, setEducation] = useState({
     'school-name': '',
     'major': '',
     'graduation-year': ''
   });
 
-  const [workExperience, setWorkExperience] = useState<WorkExperienceFields>({
+  const [workExperience, setWorkExperience] = useState({
     'company-name': '',
     'position-title': '',
     'start-date': undefined,
@@ -43,7 +43,7 @@ function App() {
     </div>
   )
 
-  function handleTabClick(section: Section) {
+  function handleTabClick(section) {
     setCurrentTab(section);
   }
 

@@ -1,21 +1,4 @@
-import { EducationFields, PersonalDetailFields, Section, StateFunction, WorkExperienceFields } from "../types";
-
-function EditSection(
-  props: {
-    currentTab: Section;
-    currentSetStateFunction:
-    {
-      'personal-details': StateFunction<PersonalDetailFields>;
-      'education': StateFunction<EducationFields>;
-      'work-experience': StateFunction<WorkExperienceFields>;
-    }
-    currentFormState: {
-      'personal-details': PersonalDetailFields;
-      'education': EducationFields;
-      'work-experience': WorkExperienceFields;
-    }
-  }
-) {
+function EditSection(props) {
 
   return (
     <form>
@@ -43,10 +26,10 @@ function EditSection(
   );
 
   function getLabels() {
-    return Object.keys(getCurrentFormState(props.currentTab) as PersonalDetailFields);
+    return Object.keys(getCurrentFormState(props.currentTab));
   }
 
-  function getCurrentFieldValue(label: string): string {
+  function getCurrentFieldValue(label) {
     const state = getCurrentFormState(props.currentTab);
 
     if (state === undefined) {
@@ -54,21 +37,21 @@ function EditSection(
     }
 
     if (props.currentTab === 'personal-details') {
-      return (state as PersonalDetailFields)[label as keyof PersonalDetailFields]?.toString() || '';
+      return (state)[label].toString() || '';
     }
 
     if (props.currentTab === 'education') {
-      return (state as EducationFields)[label as keyof EducationFields]?.toString() || '';
+      return (state)[label].toString() || '';
     }
 
     if (props.currentTab === 'work-experience') {
-      return (state as WorkExperienceFields)[label as keyof WorkExperienceFields]?.toString() || '';
+      return (state)[label].toString() || '';
     }
 
     return '';
   }
 
-  function getCurrentFormState(currentTab: Section) {
+  function getCurrentFormState(currentTab) {
     if (currentTab === 'personal-details') {
       return props.currentFormState[currentTab];
     } else if (currentTab === 'education') {
@@ -91,11 +74,11 @@ function EditSection(
     }
   }
 
-  function handleOnChange(updatedValue: string, label: string) {
+  function handleOnChange(updatedValue, label) {
     const currentTab = props.currentTab;
     if (currentTab === 'education') {
-      const currentFormState = getCurrentFormState(currentTab) as EducationFields;
-      const currentSetStateFunction = getCurrentSetStateFunction() as StateFunction<EducationFields>;
+      const currentFormState = getCurrentFormState(currentTab);
+      const currentSetStateFunction = getCurrentSetStateFunction();
 
       const newFormState = {
         ...currentFormState,
@@ -104,8 +87,8 @@ function EditSection(
 
       currentSetStateFunction(newFormState);
     } else if (currentTab === 'personal-details') {
-      const currentFormState = getCurrentFormState(currentTab) as PersonalDetailFields;
-      const currentSetStateFunction = getCurrentSetStateFunction() as StateFunction<PersonalDetailFields>;
+      const currentFormState = getCurrentFormState(currentTab);
+      const currentSetStateFunction = getCurrentSetStateFunction();
 
       const newFormState = {
         ...currentFormState,
@@ -114,8 +97,8 @@ function EditSection(
 
       currentSetStateFunction(newFormState);
     } else if (currentTab === 'work-experience') {
-      const currentFormState = getCurrentFormState(currentTab) as WorkExperienceFields;
-      const currentSetStateFunction = getCurrentSetStateFunction() as StateFunction<WorkExperienceFields>;
+      const currentFormState = getCurrentFormState(currentTab);
+      const currentSetStateFunction = getCurrentSetStateFunction();
 
       const newFormState = {
         ...currentFormState,
